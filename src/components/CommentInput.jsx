@@ -29,7 +29,7 @@ const CommentInput = ({isReplying, setIsReplying, commentId, replyingTo, isEditi
     e.preventDefault()
 
     if(!isAuth) {
-      return navigate('/interactive-comments/login')
+      return navigate('/login')
     }
 
     let endpoint = '/add-comment'
