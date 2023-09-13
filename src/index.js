@@ -13,14 +13,14 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />, // <-- root error component
     children: [
       {
-        path: "/",
+        path: "/interactive-comments",
         children: [
           {
             index: true,
             element: <Feed />,
           },
           {
-            path: "/login",
+            path: "/interactive-comments/login",
             element: <Login />,
           },
         ],

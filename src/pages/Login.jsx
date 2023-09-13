@@ -13,7 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     if(isAuth) {
-      navigate('/')
+      navigate('/interactive-comments')
     }
   }, [isAuth, navigate])
 
@@ -41,7 +41,7 @@ const Login = () => {
 
       localStorage.setItem('userId', user.data.userId)
       localStorage.setItem('token', user.data.token)
-      navigate('/')
+      navigate('/interactive-comments')
     } catch (error) {
       const msg = error.response.data.message
       setInputError(msg)
