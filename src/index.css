@@ -31,3 +31,12 @@ body {
   font-weight: 500;
   color: hsl(238, 40%, 52%);
 }
+
+.loadingMsg {
+  animation: myopa 1s;
+}
+
+@keyframes myopa {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}

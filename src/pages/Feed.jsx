@@ -17,6 +17,7 @@ const Feed = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [commentId, setCommentId] = useState(null)
+  const [loadingMsg, setLoadingMsg] = useState('')
 
   let sectionRef = useRef()
 
@@ -28,6 +29,12 @@ const Feed = () => {
   useEffect(() => {
     let observerRefValue = null
 
+    const timeoutId = setTimeout(() => {
+      if(loading) {
+        setLoadingMsg('API is hosted on a free service, it might take a few seconds to start the server...')
+      }
+    }, 3000)
+
     const observer = new ResizeObserver(entries => {
       setSectionWidth(entries[0].contentRect.width);
     })
@@ -37,7 +44,14 @@ const Feed = () => {
       observerRefValue = sectionRef.current
     }
     
-    return () => observerRefValue && observer.unobserve(observerRefValue)
+    return () => { 
+      if(observerRefValue) {
+        observer.unobserve(observerRefValue)
+      }
+      if(timeoutId) {
+        clearTimeout(timeoutId)
+      }
+    }
   }, [loading])
 
   
@@ -50,6 +64,7 @@ const Feed = () => {
       console.log(error);
     }
     setLoading(false)
+    setLoadingMsg('')
   }
 
   const openModal = () => {
@@ -90,8 +105,9 @@ const Feed = () => {
 
   if(loading) {
     return (
-      <main className='h-screen flex justify-center items-center'>
+      <main className='h-screen flex flex-col justify-center items-center'>
         <Puff color='#c3c4ef' />
+        {loadingMsg && <p className='loadingMsg text-md px-4 mt-6 text-primary-moderate-blue'>{loadingMsg}</p>}
       </main>
     )
   }
